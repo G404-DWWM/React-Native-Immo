@@ -74,3 +74,89 @@ import { TouchableOpacity } from "react-native";
   <Text>{annonce.titre}</Text>
 </TouchableOpacity>;
 ```
+
+# Amélioration de l'UI
+
+Comme pour la liste des annonces, tu peux personnaliser l'interface utilisateur avec NativeBase ou React Native Elements.
+
+voici un exemple d'une liste et d'un show avec NativeBase que nous vous fournissons pour vous aider à démarrer. Il est à adapter selon les données de votre Schema Mongoose et du front-end que vous avez choisi.
+
+```js
+import React from "react";
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Body,
+  Text,
+  Image,
+} from "native-base";
+// Ajout de Swiper pour afficher plusieurs photos
+import Swiper from "react-native-swiper";
+
+// Supposons que chaque annonce ait un champ photos qui est un tableau d'URLs
+const AnnonceList = ({ annonces, navigation }) => (
+  <Container>
+    <Content>
+      {annonces.map((annonce) => (
+        <Card key={annonce._id}>
+          <CardItem
+            button
+            onPress={() =>
+              navigation.navigate("DetailAnnonce", { annonceId: annonce._id })
+            }>
+            {annonce.photos && annonce.photos.length > 0 && (
+              <Thumbnail
+                square
+                large
+                source={{ uri: annonce.photos[0] }}
+                style={{ marginRight: 10 }}
+              />
+            )}
+            <Body>
+              <Text>{annonce.titre}</Text>
+            </Body>
+          </CardItem>
+        </Card>
+      ))}
+    </Content>
+  </Container>
+);
+
+const AnnonceDetail = ({ route }) => {
+  const { annonce } = route.params;
+
+  return (
+    <Container>
+      <Content>
+        <Card>
+          {annonce.photos && annonce.photos.length > 0 && (
+            <Swiper height={200} showsButtons={true}>
+              {annonce.photos.map((photo, index) => (
+                <Image
+                  key={index}
+                  source={{ uri: photo }}
+                  style={{ flex: 1 }}
+                />
+              ))}
+            </Swiper>
+          )}
+          <CardItem>
+            <Body>
+              <Text>{annonce.titre}</Text>
+              <Text>{annonce.description}</Text>
+            </Body>
+          </CardItem>
+        </Card>
+      </Content>
+    </Container>
+  );
+};
+
+export { AnnonceList, AnnonceDetail };
+```
+
+Pour utiliser Swiper, tu dois l'installer avec npm :
+`npm install react-native-swiper`
+https://www.npmjs.com/package/react-native-swiper
