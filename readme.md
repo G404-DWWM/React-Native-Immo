@@ -6,8 +6,8 @@ Dans ce cour, nous allons intégrer des fonctionnalités de React Native dans un
 
 ## Prérequis
 
-- Avoir réalisé le cours sur la création d'une application immobilière avec Express.js
-- Avoir des connaissances de base en React Native
+- Avoir réalisé le cours sur la création d'une application immobilière avec Express.js : https://github.com/G404-DWWM/Nodejs-NoSQL
+- Avoir des connaissances de base en React Native : https://github.com/G404-DWWM/react-native-intro
 
 # Transformation du TP Express Immo en API REST
 
